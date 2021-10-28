@@ -21,7 +21,7 @@ resource "aws_instance" "nginx" {
   apt install -y nginx
   git clone https://github.com/ILyaAX/terraform.git
   rm -rf /var/www/html/*
-  cp /teraform/html/* /var/www/html/*
+  cp terraform/html/* /var/www/html/
   EOL
   
   tags = {
