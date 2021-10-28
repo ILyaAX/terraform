@@ -28,28 +28,33 @@ resource "aws_instance" "nginx" {
   }
 }
 
-resource "aws_security_group" "instance" {
+resource "aws_security_group" "nginx" {
+  name        = "nginx"
+  description = "http"
+  vpc_id      = aws_vpc.main.id
 
-  name = var.security_nginx
+  ingress = [
+    {
+      description      = "http"
+      from_port        = 80
+      to_port          = 80
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+    }
+  ]
 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
+  egress = [
+    {
       from_port        = 0
       to_port          = 0
       protocol         = "-1"
       cidr_blocks      = ["0.0.0.0/0"]
     }
-}
-variable "security_nginx" {
-  description = "The name of the security group"
-  type        = string
-  default     = "nginx-instance"
+  ]
+
+  tags = {
+    Name = "nginx"
+  }
 }
 
 output "instance_public_ip" {
