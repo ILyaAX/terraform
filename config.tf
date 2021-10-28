@@ -11,7 +11,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resourse "aws_instance" {
+resource "aws_instance" {
   ami = "ami-00d1ab6b335f217cf"
   instance_type = "t2.micro"
   user_data = <<-EOL
