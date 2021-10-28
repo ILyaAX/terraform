@@ -14,6 +14,7 @@ provider "aws" {
 resource "aws_instance" "nginx" {
   ami = "ami-09e67e426f25ce0d7"
   instance_type = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.nginx.id]
   user_data = <<-EOL
   #!/bin/bash
   apt update
@@ -31,7 +32,6 @@ resource "aws_instance" "nginx" {
 resource "aws_security_group" "nginx" {
   name        = "nginx"
   description = "http"
-  vpc_id      = aws_vpc.main.id
 
   ingress = [
     {
