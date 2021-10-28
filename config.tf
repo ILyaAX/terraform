@@ -54,5 +54,5 @@ variable "security_nginx" {
 
 output "instance_public_ip" {
   description = "IP address nginx"
-  value       = aws_instance.app_server.public_ip
+  value       = aws_instance.nginx.public_ip
 }
